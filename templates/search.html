@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block body %}
+{% if results %}
+<div class="row" style="width:95%; margin-left:5%;">
+  
+    
+{% for x in results %}
+<base href="{% static 'images/' %}">
+<a href="/details/{{ x.game_id }}">
+<div class="card text-white mb-3"  style="width:16rem; height:430px; margin:10px;font-family:times new roman;background-image:url('{% static "241.jpg" %}');background-size: 100%;background-repeat: no-repeat; background-position: top;background-attachment: fixed">
+    <center style="height:200px;"><img src="{{ x.game_img }}" style="height:200px; width:200px; margin-top:20px" class="card-img-top img-fluid x"
+    style="height:100%;width:auto;padding:10px;" alt="..."></center>
+    </a>
+    <div class="card-body">
+        <h5 class="card-title" >{{ x.gname }}</h5>
+        <h6 >{{ x.publisher }}</h6>
+        <p class="card-text"  >{{ x.category }}</p>
+        <a href="/details/{{ x.game_id }}" class="btn btn-outline-danger" style="bottom:20px; position:absolute;">Explore</a>
+    </div>
+    </div>
+
+{% endfor %}
+</div>
+
+{% else  %}
+<div style="color:white;text-align:center;margin-top:100px;margin-bottom:23.9%;font-family: 'Aclonica'"><h1>No search results for this query</h1></div>
+{% endif %}
+
+{% endblock  %}

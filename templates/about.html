@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% block body %}
+{% load staticfiles %}
+<style>
+#d a {
+    color:#20d8da;
+}
+</style>
+
+<div class="container" style="font-family:Times new roman;color:white">
+    <center>
+        <h2 style="font-size:40px;margin-bottom:20px">About Me:</h2>
+        <img src="{% static 'images/rahul.jpg.jpg' %}" alt="" class="img img-fluid img-thumbnail" style="height:200px" data-toggle="tooltip" title="Rahul Dev Birdi">
+        <p style="font-size:20px" >Hello! I'm Rahul Dev Birdi and I made this Project with Django Framework.<br>Python programming language is used in backend processing.<br>I used Bootsrap 4 for designing purposes.<br>Thank You...</p>
+        <h3>Contact Me...</h3>
+        <ul class="nav nav-pills flex-column">
+            <li class="nav-item">
+                <a class="nav-link" href="https://www.instagram.com/r_deep10" target="blank;"><i class='fab fa-instagram' style='font-size:30px;color:white'>/r_deep10</i></a>
+            </li>
+            <li>
+                <a class="" href="https://www.twitter.com/birdi_rahul" target="blank;"><i class='fab fa-twitter' style='font-size:30px;color:white;padding:5px '>/birdi_rahul</i></a> 
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="https://www.facebook.com/rdeep107" target="blank;"><i class='fab fa-facebook' style='font-size:30px;color:white'>/Rahul Birdi</i></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="https://www.youtube.com/channel/UCvgPng63kGCp5zUeJhopXig" target="blank;"><i class='fab fa-youtube' style='font-size:30px;color:white'>/gaming107yt</i></a>
+            </li>
+        </ul>
+        </center>
+</div>
+
+{% endblock %}

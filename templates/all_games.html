@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block title %} PC|GAMES {% endblock %}
+{% block body %}
+<style>
+
+#l a {
+    color:#20d8da;
+}
+
+</style>
+
+
+<div class="row" style="width:95%; margin-left:5%;">
+{% for x in games %}
+<base href="{% static 'images/' %}">
+<a href="/details/{{ x.game_id }}">
+<div class="card text-white  mb-3"  style="width:16rem; height:430px;font-family:Times new roman ;margin:10px;background-image:url('{% static "241.jpg" %}');background-size: 100%;background-repeat: no-repeat; background-position: top;background-attachment: fixed;">
+    <center style="height:200px;"><img src="{{ x.game_img }}" style="height:200px; width:200px; margin-top:20px" class="card-img-top img-fluid x"
+    style="height:100%;width:auto;padding:10px;" alt="..."></center>
+    </a>
+    <div class="card-body">
+        <h5 class="card-title" >{{ x.gname }}</h5>
+        <h6 >{{ x.publisher }}</h6>
+        <p class="card-text"  >{{ x.category }}</p>
+        <a href="/details/{{ x.game_id }}" class="btn btn-outline-danger" style="bottom:20px; position:absolute;">Explore</a>
+    </div>
+    </div>
+
+    
+{% if users.has_other_pages %}
+  <ul class="pagination">
+    {% if users.has_previous %}
+      <li><a href="?page={{ users.previous_page_number }}">&laquo;</a></li>
+    {% else %}
+      <li class="disabled"><span>&laquo;</span></li>
+    {% endif %}
+    {% for i in users.paginator.page_range %}
+      {% if users.number == i %}
+        <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+      {% else %}
+        <li><a href="?page={{ i }}">{{ i }}</a></li>
+      {% endif %}
+    {% endfor %}
+    {% if users.has_next %}
+      <li><a href="?page={{ users.next_page_number }}">&raquo;</a></li>
+    {% else %}
+      <li class="disabled"><span>&raquo;</span></li>
+    {% endif %}
+  </ul>
+{% endif %}
+
+{% endfor %}
+</div>
+
+{% endblock %}

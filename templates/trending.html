@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block title %} PC|GAMES {% endblock %}
+{% block body %}
+<style>
+#p a {
+    color:#20d8da;
+}
+</style>
+
+
+<div class="hero-item set-bg" <img src="{% static 'banner_bg.png' %}" style="background-image: url({% static 'banner_bg.png' %});color:white">
+	<h2 style="margin-left:170px;font-size:60px;font-family:times new roman">Welcome to the</h2>
+	<h3 style="margin-left:170px;font-size:70px">Predator Gaming Hub</h3>
+	<h4 style="margin-left:170px;font-size:40px">An entertainment gaming project.</h4>
+	<a href="/4/" class="btn btn-outline-danger" style="margin-left:180px;font-size:40px;margin-top:70px">LET'S GO <img src="{% static 'solid-right-arrow.png' %}" alt="#"></a>
+</div>
+
+
+{% endblock %}

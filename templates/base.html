@@ -1,0 +1,1016 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>{% block title %} {% endblock %}</title>
+  {% block style %}
+  <style>
+    .card {
+      padding: 0px;
+      background-color: black;
+      transition: transform .1s;
+      /* Animation */
+
+
+    }
+
+    .card:hover {
+      transform: scale(0.94);
+      /* ( 1%zoom - Note: if the zoom is too large, it will go outside of the viewport) */
+    }
+
+
+    ''''''''''''''''''feedback'''''''''''''''''''''''
+
+
+    * {
+      box-sizing: border-box;
+    }
+
+    input[type=text],
+    select,
+    textarea {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      resize: vertical;
+    }
+
+    label {
+      padding: 12px 12px 12px 0;
+      display: inline-block;
+    }
+
+    input[type=submit] {
+      background-color: #4CAF50;
+      color: white;
+      padding: 12px 20px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      float: right;
+    }
+
+    input[type=submit]:hover {
+      background-color: #45a049;
+    }
+
+    .container1 {
+      border-radius: 5px;
+      background-color: #f2f2f2;
+      padding: 20px;
+      align: center;
+    }
+
+    .col-25 {
+      float: left;
+      width: 25%;
+      margin-top: 6px;
+    }
+
+    .col-75 {
+      float: left;
+      width: 75%;
+      margin-top: 6px;
+    }
+
+    /* Clear floats after the columns */
+    .row:after {
+      content: "";
+      display: table;
+      clear: both;
+    }
+
+    /* Responsive layout - when the screen is less than 600px wide, make the two columns stack on top of each other instead of next to each other */
+    @media screen and (max-width: 600px) {
+
+      .col-25,
+      .col-75,
+      input[type=submit] {
+        width: 100%;
+        margin-top: 0;
+      }
+    }
+
+
+
+
+    /* --------------Fashion Trends--------------- */
+
+    .fashion-trends {
+      padding: 30px 0;
+    }
+
+    .fashion-box {
+      margin: 10px 0;
+    }
+
+
+    .title-style {
+      position: relative;
+      margin: 0 auto 80px;
+      background: black;
+      height: 120px;
+      width: 80%;
+      max-width: 700px;
+      box-shadow: 0 4px 5px 0 rgba(0, 0, 50, 0.5);
+    }
+
+    .title-style::after {
+      position: absolute;
+      content: '';
+      height: 100px;
+      width: 200px;
+      background: #f992a6;
+      top: -10px;
+      left: -10px;
+      z-index: -1;
+    }
+
+    .title-style::before {
+      position: absolute;
+      content: '';
+      height: 100px;
+      width: 200px;
+      background: #f992a6;
+      bottom: -10px;
+      right: -10px;
+      z-index: -1;
+    }
+
+    .trending-img {
+      position: relative;
+      margin-bottom: 15px;
+    }
+
+    .trending-img img {
+      width: 350px;
+      height: 500px;
+    }
+
+    .btn-buy {
+      position: absolute;
+      background: #f5f6fc;
+      width: 150px;
+      padding: 10px 0;
+      border: none;
+      border-radius: 2px;
+      outline: none !important;
+      text-transform: uppercase;
+      left: 50%;
+      bottom: 0;
+      transform: translate(-50%, 0);
+      opacity: 0;
+      z-index: 1;
+    }
+
+    .trending-img:hover .btn-buy {
+      transform: translate(-50%, 50%);
+      bottom: 50%;
+      opacity: 3;
+      transition: .7s;
+    }
+
+    .overlay {
+      position: absolute;
+      height: 0;
+      width: 100%;
+      background: #333;
+      top: 0;
+      transition: .5s;
+      opacity: 0;
+    }
+
+    .trending-img:hover .overlay {
+      opacity: 0.5;
+      height: 100%;
+    }
+
+
+ #bg {
+      background-size: 100% 100%;
+      background-repeat: no-repeat;
+      background-position: top;
+      background-attachment: fixed;
+    }
+
+
+    ''''''''''''''''''''''''''Navbar'''''''''''''
+
+
+    /* :: 4.0 Header Area CSS */
+    .header-area .top-header-area .top-search-area {
+
+      z-index: 1;
+    }
+
+    .header-area .top-header-area .top-search-area form {
+      position: relative;
+      z-index: 5;
+      width: 300px;
+    }
+
+    .header-area .top-header-area .top-search-area form input {
+      -webkit-transition-duration: 500ms;
+      transition-duration: 500ms;
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      height: 42px;
+      background-color: #ebf5f5;
+      border: none;
+      color: #ababab;
+      font-size: 12px;
+      font-style: italic;
+      padding: 0 20px;
+    }
+
+    .header-area .top-header-area .top-search-area form input:focus {
+      box-shadow: 0 0 5px 1px rgba(0, 0, 0, 0.15);
+    }
+
+    .header-area .top-header-area .top-search-area form button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 42px;
+      z-index: 10;
+      width: 50px;
+      background-color: primary;
+      border: none;
+      color: #555555;
+      cursor: pointer;
+    }
+
+    .header-area .top-header-area .top-search-area form button:hover,
+    .header-area .top-header-area .top-search-area form button:focus {
+      color: red;
+      box-shadow: black;
+    }
+
+    .header-area .egames-main-menu .classy-navbar .nav-brand {
+      max-width: 160px;
+      margin-right: 30px;
+    }
+
+    .header-area .egames-main-menu .classy-navbar .classynav ul li a {
+      font-weight: 600;
+      text-transform: capitalize;
+      font-size: 16px;
+      padding: 0 10px;
+      color: white;
+    }
+
+    .header-area .egames-main-menu .classy-navbar .classynav ul li a:hover,
+    .header-area .egames-main-menu .classy-navbar .classynav ul li a:focus {
+      color: #20d8da;
+    }
+
+
+    /* :: 4.0 Header Area CSS */
+
+    .header-area {
+
+      z-index: 1000;
+      width: 100%;
+
+      .top-header-area {
+        z-index: 1;
+        width: 100%;
+        height: 85px;
+
+        .top-search-area {
+          z-index: 1;
+
+          form {
+            position: relative;
+            z-index: 1;
+            width: 255px;
+
+            @media #{$breakpoint-xs} {
+              width: 120px;
+              margin-left: 15px;
+            }
+
+            @media #{$breakpoint-xs-landscape} {
+              width: 160px;
+            }
+
+            @media #{$breakpoint-sm} {
+              width: 200px;
+            }
+
+            input {
+              @include trans-duration(500ms);
+              z-index: 1;
+              width: 100%;
+              height: 42px;
+              background-color: #ebf5f5;
+              border: none;
+              color: #ababab;
+              font-size: 12px;
+              font-style: italic;
+              padding: 0 20px;
+
+              &:focus {
+                box-shadow: 0 0 5px 1px rgba(0, 0, 0, 0.15);
+              }
+            }
+
+            button {
+              top: 0;
+              right: 0;
+              height: 42px;
+              z-index: 10;
+              width: 50px;
+              background-color: transparent;
+              border: none;
+              color: #555555;
+              cursor: pointer;
+
+              &:hover,
+              &:focus {
+                color: $hover-color;
+                box-shadow: none;
+              }
+            }
+          }
+        }
+
+        .login-area {
+          z-index: 1;
+
+          a {
+            display: block;
+            width: 160px;
+            height: 42px;
+            background-color: $pri-color;
+            text-align: center;
+            color: #fff;
+            line-height: 42px;
+            font-size: 14px;
+            margin-left: 10px;
+            font-weight: 400;
+
+            @media #{$breakpoint-xs} {
+              width: 30px;
+            }
+
+            @media #{$breakpoint-xs-landscape} {
+              width: 50px;
+            }
+
+            &:hover,
+            &:focus {
+              background-color: $dark-color;
+              font-weight: 400;
+            }
+
+            i {
+              display: none;
+              line-height: 42px;
+
+              @media #{$breakpoint-xs} {
+                display: block;
+              }
+            }
+
+            span {
+              @media #{$breakpoint-xs} {
+                display: none;
+              }
+            }
+          }
+        }
+      }
+
+
+      .egames-main-menu {
+        width: 100%;
+        height: 70px;
+
+        .classy-navbar {
+          height: 70px;
+          padding: 0;
+
+          @media #{$breakpoint-md} {
+            -webkit-box-orient: horizontal;
+            -webkit-box-direction: reverse;
+            -ms-flex-direction: row-reverse;
+            flex-direction: row-reverse;
+          }
+
+
+          .classynav>ul>li:first-child a {
+            padding-left: 0;
+
+            @media #{$breakpoint-md} {
+              padding-left: 10px;
+            }
+
+            @media #{$breakpoint-xs} {
+              padding-left: 10px;
+            }
+          }
+
+          .classynav ul li ul li a {
+            color: $sec-color;
+            font-size: 14px;
+            padding: 0 20px;
+          }
+        }
+
+        .top-social-info {
+          a {
+            font-size: 14px;
+            color: #545454;
+            display: inline-block;
+            margin-left: 30px;
+
+            @media #{$breakpoint-md} {
+              margin-left: 0;
+              margin-right: 30px;
+            }
+
+            @media #{$breakpoint-xs} {
+              margin-left: 0;
+              margin-right: 15px;
+            }
+
+            &:hover,
+            &:focus {
+              color: $hover-color;
+            }
+          }
+        }
+      }
+
+      .is-sticky {
+        .egames-main-menu {
+          z-index: 9999;
+          box-shadow: 0 5px 50px 0 rgba(0, 0, 0, 0.2);
+        }
+      }
+    }
+
+
+
+    .classy-nav-container a:hover,
+    .classy-nav-container a:focus {
+      -webkit-transition-duration: 500ms;
+      transition-duration: 500ms;
+      text-decoration: none;
+      outline: none;
+      font-size: 14px;
+      font-weight: 400;
+      color: #1abc9c;
+    }
+
+    .classy-navbar {
+      width: 100%;
+      height: 70px;
+      padding: 0.5em 2em;
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-box-align: center;
+      -ms-flex-align: center;
+      -ms-grid-row-align: center;
+      align-items: center;
+    }
+
+    .classy-navbar .nav-brand {
+      font-size: 26px;
+      font-weight: 500;
+      color: #565656;
+      display: inline-block;
+      margin-right: 30px;
+    }
+
+    .classy-navbar .nav-brand:focus,
+    .classy-navbar .nav-brand:hover {
+      font-size: 26px;
+      font-weight: 500;
+    }
+
+    .classynav ul li {
+      display: inline-block;
+      clear: both;
+      position: ;
+      z-index: 10;
+    }
+
+    .classynav ul li.cn-dropdown-item {
+      position: ;
+      z-index: 10;
+    }
+
+    .classynav ul li.cn-dropdown-item ul li {
+      position: ;
+      z-index: 10;
+    }
+
+    .classynav ul li ul li {
+      display: block;
+    }
+
+    .classynav ul li ul li a {
+      padding: 0 20px;
+    }
+
+    .classynav ul li a {
+      padding: 0 12px;
+      display: block;
+      height: 35px;
+      font-size: 14px;
+      line-height: 34px;
+    }
+
+    .classynav ul li .megamenu li a {
+      padding: 0 12px;
+    }
+
+    .classynav ul li div.single-mega a {
+      height: auto;
+      line-height: 1;
+    }
+
+    /* navbarToggler */
+    .classy-navbar-toggler {
+      border: none;
+      background-color: transparent;
+      cursor: pointer;
+      display: none;
+    }
+
+    .classy-navbar-toggler .navbarToggler {
+
+      cursor: pointer;
+    }
+
+    .classy-navbar-toggler .navbarToggler span {
+      position: ;
+      background-color: #858585;
+      border-radius: 3px;
+      display: block;
+      height: 3px;
+      margin-top: 5px;
+      padding: 0;
+      -webkit-transition-duration: 300ms;
+      transition-duration: 300ms;
+      width: 30px;
+      cursor: pointer;
+    }
+
+
+    /* Desktop Area CSS */
+    .breakpoint-off .classynav {
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-box-align: center;
+      -ms-flex-align: center;
+      -ms-grid-row-align: center;
+      align-items: center;
+    }
+
+    .breakpoint-off .classynav ul li .dropdown {
+      width: 180px;
+      position: absolute;
+      background-color: #ffffff;
+      top: 120%;
+      left: 0;
+      z-index: 100;
+      height: auto;
+      box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
+      -webkit-transition-duration: 300ms;
+      transition-duration: 300ms;
+      opacity: 0;
+      visibility: hidden;
+      padding: 10px 0;
+    }
+
+    .breakpoint-off .classynav ul li .dropdown li .dropdown {
+      top: 10px;
+      left: 180px;
+      z-index: 200;
+      opacity: 0;
+      visibility: hidden;  
+    }
+
+    .breakpoint-off .classynav ul li .dropdown li .dropdown li .dropdown,
+    .breakpoint-off .classynav ul li .dropdown li .dropdown li .dropdown li .dropdown,
+    .breakpoint-off .classynav ul li .dropdown li .dropdown li .dropdown li .dropdown li .dropdown,
+    .breakpoint-off .classynav ul li .dropdown li .dropdown li .dropdown li .dropdown li .dropdown li .dropdown,
+    .breakpoint-off .classynav ul li .dropdown li .dropdown li .dropdown li .dropdown li .dropdown li .dropdown li .dropdown,
+    .breakpoint-off .classynav ul li .dropdown li .dropdown li .dropdown li .dropdown li .dropdown li .dropdown li .dropdown li .dropdown,
+    .breakpoint-off .classynav ul li .dropdown li .dropdown li .dropdown li .dropdown li .dropdown li .dropdown li .dropdown li .dropdown li .dropdown,
+    .breakpoint-off .classynav ul li .dropdown li .dropdown li .dropdown li .dropdown li .dropdown li .dropdown li .dropdown li .dropdown li .dropdown li .dropdown {
+      opacity: 0;
+      visibility: hidden;
+      top: 120%;
+    }
+
+    .breakpoint-off .classynav ul li:hover .dropdown {
+      opacity: 1;
+      visibility: visible;
+      top: 100%;
+    }
+
+    opacity: 1;
+    visibility: visible;
+    top: -10px;
+    }
+
+
+    /////////////////feedback card//////////////////
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    input[type=text],
+    input[type=text] {
+      width: 100%;
+      padding: 12px 20px;
+      margin: 10px 0;
+      display: inline-block;
+    }
+
+    button:hover {
+      opacity: 1.5;
+    }
+
+
+/////////////////////////////////
+/////////////////////////////////////////////
+element.style {
+    background-image: url(img/slider-bg-1.jpg);
+}
+.hero-item {
+    height: 921px;
+    padding-top: 125px;
+    border-bottom: 2px solid #b01ba5;
+}
+.set-bg {
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: top center;
+}
+/////////////////////////////////////////////////
+/* ------------------
+  Game single Page
+---------------------*/
+
+.games-single-page,
+.review-section,
+.blog-page,
+.contact-page {
+	padding: 104px 0;
+	/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#501755+0,2d1854+100 */
+	background: #501755;
+	/* Old browsers */
+	/* FF3.6-15 */
+	background: -webkit-linear-gradient(45deg, #501755 0%, #2d1854 100%);
+	/* Chrome10-25,Safari5.1-6 */
+	background: -o-linear-gradient(45deg, #501755 0%, #2d1854 100%);
+	background: linear-gradient(45deg, #501755 0%, #2d1854 100%);
+	/* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#501755', endColorstr='#2d1854', GradientType=1);
+	/* IE6-9 fallback on horizontal gradient */
+}
+
+.game-single-preview {
+	margin-bottom: 108px;
+}
+
+.game-single-content .gs-meta {
+	font-size: 18px;
+	color: #68647d;
+	font-weight: 500;
+	margin-bottom: 20px;
+}
+
+
+.game-single-content .gs-title {
+	font-size: 60px;
+	color: #fff;
+	margin-bottom: 40px;
+}
+
+.game-single-content h4 {
+	color: #b01ba5;
+	margin-bottom: 20px;
+}
+
+.game-single-content p {
+	font-size: 16px;
+	font-weight: 500;
+	color: #68647d;
+	line-height: 1.8;
+	margin-bottom: 70px;
+}
+
+.rating-widget {
+	background: #34164b;
+	padding: 55px 0 30px;
+}
+
+.rating-widget ul {
+	list-style: none;
+	padding: 0 38px;
+	margin-bottom: 30px;
+}
+
+.rating-widget ul li {
+	display: block;
+	font-size: 16px;
+	color: #b01ba5;
+	font-weight: 500;
+	margin-bottom: 10px;
+}
+
+.rating-widget ul li span {
+	float: right;
+	color: #68647d;
+}
+
+.rating-widget h5 {
+	text-align: right;
+	font-size: 36px;
+	color: #fff;
+	font-weight: 900;
+	padding-right: 38px;
+}
+
+.rating-widget h5 i {
+	font-weight: 500;
+	font-size: 16px;
+	font-style: italic;
+	color: #65607b;
+	text-transform: uppercase;
+	margin-right: 18px;
+}
+
+.rating-widget h5 span {
+	color: #b01ba5;
+}
+//////////////////////////////////////////////////////
+/* --------------------
+  Newsletter section
+----------------------*/
+
+.newsletter-section {
+	padding: 108px 0 95px;
+	text-align: center;
+}
+
+.newsletter-section h2 {
+	font-size: 48px;
+	color: #fff;
+	font-weight: 700;
+	font-style: italic;
+	text-transform: uppercase;
+	margin-bottom: 73px;
+}
+
+.newsletter-form {
+	padding-left: 56px;
+}
+
+.newsletter-form input {
+	font-size: 14px;
+	font-weight: 700;
+	font-style: italic;
+	color: #fff;
+	width: 787px;
+	border: none;
+	border-bottom: 2px solid #9b91a6;
+	background: none;
+	height: 63px;
+	margin-right: 26px;
+}
+//////////////////////////////////////////////////////
+  </style>
+  {% endblock  %}
+
+
+</head>
+<link href='https://fonts.googleapis.com/css?family=Trade Winds' rel='stylesheet'>
+<link href='https://fonts.googleapis.com/css?family=Aclonica' rel='stylesheet'>
+<link href='https://fonts.googleapis.com/css?family=Aclonica' rel='stylesheet'>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+  integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+  integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+<body id="bg" style="background-image: url({% static 'banner_bg.png' %});visibility: visible; animation-delay: 500ms; animation-name: fadeInDown;background-size: 100% 100%;background-repeat: no-repeat; background-position: top;background-attachment: fixed;">
+
+  {% block header %}
+  {% endblock  %}
+
+<header class="header-area wow fadeInDown " data-wow-delay="500ms" id="bg"
+    style=";background-image:url('{% static "header2.jpg" %}');visibility: visible; animation-delay: 500ms; animation-name: fadeInDown;background-size: 100% 100%;background-repeat: no-repeat; background-position: top;background-attachment: fixed;">
+    <!-- Top Header Area -->
+<div class="top-header-area" style="height:130px;">
+  <div class="container h-100">
+    <div class="col-22 d-flex align-items-center justify-content-between">
+          <!-- Logo Area -->
+          <div class="logo" style="margin-bottom:60px">
+            <a href="/"><img src="{% static '21.png' %}" width="550" height="120"></a>
+          </div>
+
+          <!-- Search & Login Area -->
+          <!-- Top Search Area -->
+          <div class="top-search-area" style="margin-left:300px;margin-top:55px">
+            <form class="form-inline my-2 my-lg-0" action="/search" method="GET">
+              <input class="form-control mr-sm" name="search" style="border-radius:15px;color:black" type="search"
+                placeholder="Search" aria-label="Search" required>
+              <button type="submit" class="btn"><i class="fa fa-search"></i></button>
+            </form>
+            <div  
+                  style="margin-top:30px;margin-left:100px;padding:10px;background-image:url('{% static "header2.jpg" %}');background-size: 100% 100%;background-repeat: no-repeat; background-position: top;background-attachment: fixed;">
+                  <a href="https://www.instagram.com/r_deep10" target="blank;"><img src="{% static '/logo/image_search_1574161595564.png' %}"  style="height:30px;"></a>
+            <a href="https://www.facebook.com/rdeep107" target="blank;" ><img src="{% static '/logo/image_search_1574161624354.png' %}" href="" style="height:25px;margin-left:10px"></a>
+            <a href="https://www.twitter.com/birdi_rahul" target="blank;"><img src="{% static '/logo/image_search_1574161674521.png' %}" href="" style="height:25px;margin-left:10px"></a>
+            <a href="https://www.youtube.com/channel/UCvgPng63kGCp5zUeJhopXig" target="blank;" ><img src="{% static '/logo/image_search_1574161701515.png' %}" href="" style="height:25px;margin-left:10px"></a>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    <!-- Top Social Info -->
+              <div class="top-social-info">
+                
+              </div>
+
+    <!-- Navbar Area -->
+    <div id="sticker-sticky-wrapper" style="height: 70px;">
+      <div class="egames-main-menu">
+        <div class="classy-nav-container breakpoint-off light left  "
+          style="margin-right:500px;background-image:url('{% static "header2.jpg" %}')">
+          <div style="background-image:url('{% static "header2.jpg" %}')">
+            <!-- Menu -->
+            <nav class="classy-navbar  justify-content-between navbar-expand-sm sticky-top "
+              style=";background-image:url('{% static "header2.jpg" %}');background-size: 100% 100%;background-repeat: no-repeat; background-position: top;background-attachment: fixed;"
+              id="egamesNav">
+
+              <!-- Navbar Toggler -->
+              <div class="classy-navbar-toggler  "
+                style=";background-image:url('{% static "header2.jpg" %}');background-size: 100% 100%;background-repeat: no-repeat; background-position: top;background-attachment: fixed;">
+                <span class="navbarToggler "><span></span><span></span><span></span></span>
+              </div>
+
+              <!-- Menu -->
+              <div class="classy-menu"
+                style=";background-image:url('{% static "header2.jpg" %}');background-size: 100% 100%;background-repeat: no-repeat; background-position: top;background-attachment: fixed;">
+
+                <!-- Close Button -->
+                <div class="classycloseIcon "
+                  style=";background-image:url('{% static "header2.jpg" %}');background-size: 100% 100%;background-repeat: no-repeat; background-position: top;background-attachment: fixed;">
+                  <div class="cross-wrap"><span class="top"></span><span class="bottom"></span></div>
+                </div>
+
+                <!-- Nav Start -->
+                <div class="classynav "
+                  style="background-image:url('{% static "header2.jpg" %}');background-size: 100% 100%;background-repeat: no-repeat; background-position: top;background-attachment: fixed;font-family:times new roman;">
+                  <ul>
+                    <li id="a"><a href="/4/" style="font-size:30px;">Home</a></li>
+                    <li id="l"><a href="/5/" style="font-size:20px">Games</a></li>
+                    <li class="nav-item active">
+                    <li class="nav-item dropdown">
+                      <a class="nav-link dropdown-toggle" href="" id="navbarDropdown" style="font-size:20px"
+                        role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Genre</a>
+
+                      <div class="dropdown "
+                        style="background-image:url('{% static "header3.jpg" %}');background-size: 100% 100%;background-repeat: no-repeat; background-position: top;background-attachment: fixed;margin-left:3px">
+                        <a class="dropdown-item" href="/details/Action" style="color:skyblue">Action</a>
+                        <a class="dropdown-item" href="/details/Adventure" style="color:skyblue">Adventure</a>
+                        <a class="dropdown-item" href="/details/Arcade" style="color:skyblue">Arcade</a>
+                        <a class="dropdown-item" href="/details/Competitive" style="color:skyblue">Competitive</a>
+                        <a class="dropdown-item" href="/details/Fighting" style="color:skyblue">Fighting</a>
+                        <a class="dropdown-item" href="/details/Fps" style="color:skyblue">Fps</a>
+                        <a class="dropdown-item" href="/details/Horror" style="color:skyblue">Horror</a>
+                        <a class="dropdown-item" href="/details/Racing" style="color:skyblue">Racing</a>
+                        <a class="dropdown-item" href="/details/Shooting" style="color:skyblue">Shooting</a>
+                        <a class="dropdown-item" href="/details/Sports" style="color:skyblue">Sports</a>
+                        <a class="dropdown-item" href="/details/Strategy" style="color:skyblue">Strategy</a>
+                        <a class="dropdown-item" href="/details/Survival" style="color:skyblue">Survival</a>
+                        <a class="dropdown-item" href="/details/War" style="color:skyblue">War</a>
+                      </div>
+
+                    <li id="c"><a href="/2/" style="font-size:20px">Feedback</a></li>
+                    <li id="d"><a href="/3/" style="font-size:20px">About</a></li>
+
+                  </ul>
+                </div>
+                <!-- Nav End -->
+              </div>
+
+              
+            </nav>
+          </div>
+        </div>
+      </div>
+  </header>
+
+
+
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+    crossorigin="anonymous"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+    integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+    crossorigin="anonymous"></script>
+
+  {% block nav %}
+  {% endblock  %}
+  <nav class="collapse bd-links"></nav>
+
+  {% block body %}
+  {% endblock %}
+
+  <footer class="site-footer "
+    style="font-family:times new roman;color:white;margin-bottom:10px;background-image:url('{% static "footer5.jpg" %}');background-size: 100% 100%;background-repeat: no-repeat; background-position: top;background-attachment: fixed">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6">
+          <div class="row" style="margin-top:30px">
+            <div class="col-md-7">
+              <h2 class="footer-heading mb-4">About Us</h2>
+              <p>Hello! I'm Rahul Dev Birdi and I made this Project with Django Framework.<br>Python programming
+                language is used in backend processing.<br>I used Bootsrap 4 for designing purposes.<br>Thank You...
+              </p>
+            </div>
+            <div class="col-md-4 ml-auto">
+              <h2 class="footer-heading mb-4">Features</h2>
+              <ul class="list-unstyled" style="color:white">
+                <li><a href="/3/" style="color:white">About Us</a></li>
+                <li><a href="#" style="color:white">Terms of Service</a></li>
+                <li><a href="#" style="color:white">Privacy</a></li>
+                <li><a href="/2/" style="color:white">Contact Us</a></li>
+              </ul>
+            </div>
+
+          </div>
+        </div>
+        <div class="col-md-4 ml-auto">
+
+          <div class="mb-5" style="margin-top:30px">
+            <h2 class="footer-heading mb-4">Search Here</h2>
+            <form class="form-inline my-2 my-lg-0" action="/search" method="GET">
+              <div class="input-group mb-3">
+                <input class="form-control mr-sm-2" name="search" style="border-radius:15px" type="search"
+                  placeholder="Search" aria-label="Search" required>
+                <div class="input-group-append">
+                  <button type="submit" class="btn btn-outline-danger"><i class="fa fa-search"></i></button>
+                </div>
+              </div>
+            </form>
+          </div>
+
+
+          <h3 class="mb-4" style="margin-bottom:20px">Follow Us</h3>
+          
+          <div class="top-social-info" style="margin-bottom:30px">
+            <a href="https://www.instagram.com/r_deep10" target="blank;"><img src="{% static '/logo/image_search_1574161595564.png' %}"  style="height:40px;"></a>
+            <a href="https://www.facebook.com/rdeep107" target="blank;" ><img src="{% static '/logo/image_search_1574161624354.png' %}" href="" style="height:35px;margin-left:10px"></a>
+            <a href="https://www.twitter.com/birdi_rahul" target="blank;"><img src="{% static '/logo/image_search_1574161674521.png' %}" href="" style="height:35px;margin-left:10px"></a>
+            <a href="https://www.youtube.com/channel/UCvgPng63kGCp5zUeJhopXig" target="blank;" ><img src="{% static '/logo/image_search_1574161701515.png' %}" href="" style="height:35px;margin-left:10px"></a>
+          </div>
+
+        </div>
+      </div>
+      <div class="row pt-7 mt-7 text-center">
+        <div class="col-md-12" style="margin-bottom:30px">
+          <div class="border-top pt-5">
+            <p style="font-size:20px">
+              <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+              Copyright ©
+              <script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made
+              by<i class="icon-heart text-danger" aria-hidden="true"></i> <a target="_blank"><strong style="color:red;font-family:century gothic">RAHUL BIRDI</strong></a>
+              <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+            </p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
